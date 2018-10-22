@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.Transactional;
 import pl.ciemic.spring5recipeapp.domain.*;
 import pl.ciemic.spring5recipeapp.repositories.CategoryRepository;
 import pl.ciemic.spring5recipeapp.repositories.RecipeRepository;
@@ -29,6 +30,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
         recipeRepository.saveAll(getRecipes());
         log.debug("Loading bootstrap data");
